@@ -25,6 +25,7 @@ Requisitos mínimos para instalação.
 *   chown unbound.unbound /etc/unbound/ -R
 *   chmod 644 unbound_server.pem
 *   chmod 644 unbound_server.key
+*   CONFIGURAR O IP DO SERVIDOR NO ARQUIVO DE CONFIGURAÇÃO
 
 ## Habilitando o Serviço do Unbound.
 *	systemctl enable unbound
