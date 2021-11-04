@@ -35,17 +35,13 @@ Requisitos mínimos para instalação.
 *	systemctl restart unbound
 *	systemctl status unbound
 
-## Testando o Serviço.
+## Testando o DNS.
 *	dig nic.br
-*	Altere o DNS do Servidor
-
-## Verificando os RR (Resource Records) do DNSSEC
-*	DNSKEY (Chave pública do domínio) - dig nic.br DNSKEY
-*	DS (Ponteiro para a cadeia de confiança) - dig nic.br DS
-*	RRSIG (Assinatura do RRset) - dig nic.br RRSIG
 
 ## Implementando o DNSSEC.
+*	dig nic.br +dnssec +multi
 *	unbound-anchor -a /var/lib/unbound/root.key -v
+* 	Descomente a Linha no unbound.conf: #auto-trust-anchor-file: "/etc/unbound/root.key
 
 ## Checar as configurações do Unbound
 *	unbound-checkconf
