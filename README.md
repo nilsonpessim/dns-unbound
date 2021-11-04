@@ -25,7 +25,10 @@ Requisitos mínimos para instalação.
 *   chown unbound.unbound /etc/unbound/ -R
 *   chmod 644 unbound_server.pem
 *   chmod 644 unbound_server.key
-*   CONFIGURAR O IP DO SERVIDOR NO ARQUIVO DE CONFIGURAÇÃO
+
+## Informe o endereço IP
+*	/etc/unbound.conf
+*   /etc/resolv.conf
 
 ## Habilitando o Serviço do Unbound.
 *	systemctl enable unbound
@@ -33,8 +36,13 @@ Requisitos mínimos para instalação.
 *	systemctl status unbound
 
 ## Testando o Serviço.
-*	Utilizando a ferramenta dig, vamos testar: dig nic.br @ip-do-servidor  - ns/a/ptr
+*	dig nic.br
 *	Altere o DNS do Servidor
+
+## Verificando os RR (Resource Records) do DNSSEC
+*	DNSKEY (Chave pública do domínio) - dig nic.br DNSKEY
+*	DS (Ponteiro para a cadeia de confiança) - dig nic.br DS
+*	RRSIG (Assinatura do RRset) - dig nic.br RRSIG
 
 ## Implementando o DNSSEC.
 *	unbound-anchor -a /var/lib/unbound/root.key -v
@@ -43,10 +51,12 @@ Requisitos mínimos para instalação.
 *	unbound-checkconf
 *	systemctl restart unbound
 
-## Verificando os Resource Records do DNSSEC
-*	DNSKEY (Chave pública do domínio) - dig nic.br DNSKEY
-*	DS (Ponteiro para a cadeia de confiança) - dig nic.br DS
-*	RRSIG (Assinatura do RRset) - dig nic.br RRSIG
+## Flags de validação! 
+* qr: query - consulta (0) | resposta (1)
+* rd: Recursão Desejada
+* ra: Recursão Disponível
+* ad: Dado Autenticado
+* ns/a/ptr
 
 ## Referências
 [![Vaanmonde](https://avatars.githubusercontent.com/u/21218780?s=48)](https://github.com/vaamonde/ubiquiti-unifi)
